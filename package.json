@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/content": "^2.3.0",
+    "nanoid": "^4.0.0",
+    "nuxt": "3.0.0"
+  },
+  "dependencies": {
+    "@types/formidable": "^2.0.5",
+    "@types/multiparty": "^0.0.33",
+    "@types/nanoid": "^3.0.0",
+    "formidable": "^2.1.1",
+    "fs": "^0.0.1-security",
+    "multiparty": "^4.2.3"
+  }
+}

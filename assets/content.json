@@ -1,0 +1,19 @@
+[
+  {
+    "Category": "Getting there",
+    "img_src": "/imgs/boat_norhter_lights.jpg",
+    "ideas": [
+      "Ferry to England - Drive to Scotland",
+      "Ferry from France to Scotland"
+    ]
+  },
+  {
+    "Category": "Activities",
+    "img_src": "/imgs/under_the_stars.png",
+    "ideas": [
+      "Climbing mountains",
+      "Drinking fresh spring water",
+      "Visiting shawns cousin"
+    ]
+  }
+]
