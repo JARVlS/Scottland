@@ -2,7 +2,7 @@
   <div class="category" id="getting_there">
     <img class="picture_container" :src="props.img_src" />
     <h2 class="category_headline">{{ props.headline }}</h2>
-    <router-link :to="props.headline" class="ideas" v-for="idea in props.ideas" >{{ idea }}</router-link>
+    <NuxtLink :to='{name:"details-idea", params:{idea:idea[0]}}' class="ideas" v-for="idea in props.ideas" >{{ idea[0] }}</NuxtLink>
     <form class="input_container">
       <input
         v-model="add_idea_form"
@@ -27,7 +27,7 @@ import data from "~/assets/content.json";
 const props = defineProps<{
   headline: string;
   img_src: string;
-  ideas: Array<string>;
+  ideas: Array<Array<string|Array<string>>>;
 }>();
 
 interface Result {
@@ -40,7 +40,7 @@ async function submit_idea() {
   if (add_idea_form.value.length > 0) {
     await data.forEach((c) => {
       if (c.Category == props.headline) {
-        c.ideas.push(add_idea_form.value);
+        c.ideas.push([add_idea_form.value, []]);
       }
     });
     add_idea_form.value = "";
