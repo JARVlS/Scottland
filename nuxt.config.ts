@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default {
-    modules:['@nuxt/content'],
-    router:{
-        
+export default defineNuxtConfig ({
+    app: {
+        pageTransition: {name:"layout", mode: "out-in"}
     }
-}
+})

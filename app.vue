@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
-    <NuxtPage></NuxtPage>
-  </div>
+  <NuxtLink id="navigate_home" to="/">HOME</NuxtLink>
+  <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 </template>
 
 <style>
@@ -23,8 +24,11 @@
   --blue_grotto: #278ab0;
   --ivory: #eaeae0;
 }
+*{
+  background-color: var(--blue);
 
-#app {
+}
+.layout {
   font-family: Calibri, sans-serif;
   height: 100vh;
   width: 100vw;
@@ -32,7 +36,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--blue);
   color: var(--ivory);
 }
 
@@ -84,5 +87,40 @@
   opacity: 1;
   box-shadow: 0 0 15px var(--neon_green);
 }
+#navigate_home {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px var(--neon_green);
+  border-radius: 5px;
+  color: var(--ivory);
+  background-color: var(--blue);
+  z-index: 100;
+  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
 
+#navigate_home:hover {
+  color: var(--blue);
+  background-color: var(--neon_green);
+  box-shadow: 0 0 20px var(--neon_green);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.4s;
+}
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+.layout-leave-to{
+  transform: translateX(-2rem);
+}
+.layout-enter-from{
+  transform: translateX(2rem);
+}
 </style>

@@ -1,41 +1,43 @@
 <template>
-  <h1 id="main_headline">Scotland, we are coming</h1>
-  <Category
-    v-if="data"
-    v-for="category in data"
-    :headline="category.Category"
-    :ideas="category.ideas"
-    :img_src="category.img_src"
-  />
-  <form class="input_container">
-    <input
-      v-model="add_category_input"
-      type="text"
-      id="add_category"
-      required
+  <div class="layout">
+    <h1 id="main_headline">Scotland, we are coming</h1>
+    <Category
+      v-if="data"
+      v-for="category in data"
+      :headline="category.Category"
+      :ideas="category.ideas"
+      :img_src="category.img_src"
     />
-    <label for="add_category">Add Category...</label>
-    <button class="add_idea" @click.prevent="submit_category">✓</button>
-    <input
-      ref="file"
-      id="image_input"
-      max="1"
-      type="file"
-      @change="handle_file"
-      required
-    />
-    <label
-      for="image_input"
-      id="image_input_label"
-      :class="file_count > 0 ? 'file_added' : ''"
-      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title>Browse Files</title>
-        <path
-          d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z"
-        />
-      </svg>
-    </label>
-  </form>
+    <form class="input_container">
+      <input
+        v-model="add_category_input"
+        type="text"
+        id="add_category"
+        required
+      />
+      <label for="add_category">Add Category...</label>
+      <button class="add_idea" @click.prevent="submit_category">✓</button>
+      <input
+        ref="file"
+        id="image_input"
+        max="1"
+        type="file"
+        @change="handle_file"
+        required
+      />
+      <label
+        for="image_input"
+        id="image_input_label"
+        :class="file_count > 0 ? 'file_added' : ''"
+        ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>Browse Files</title>
+          <path
+            d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z"
+          />
+        </svg>
+      </label>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -55,9 +57,9 @@ async function upload_image() {
   const fd = new FormData();
   fd.append("file", file.value.files[0]);
   console.log(fd);
-  var ajaxRequest = new XMLHttpRequest()
-  ajaxRequest.open("POST", "/api/image")
-  ajaxRequest.send(fd)
+  var ajaxRequest = new XMLHttpRequest();
+  ajaxRequest.open("POST", "/api/image");
+  ajaxRequest.send(fd);
 }
 
 async function submit_category() {
