@@ -2,8 +2,13 @@
   <div class="category" id="getting_there">
     <img class="picture_container" :src="props.img_src" />
     <h2 class="category_headline">{{ props.headline }}</h2>
-    <NuxtLink :to='{name:"details-idea", params:{idea:idea[0]}}' class="ideas" v-for="idea in props.ideas" >{{ idea[0] }}</NuxtLink>
-    <form class="input_container">
+    <NuxtLink
+      :to="{ name: 'details-idea', params: { idea: idea[0] } }"
+      class="ideas"
+      v-for="idea in props.ideas"
+      >{{ idea[0] }}</NuxtLink
+    >
+    <form class="input_container" @submit.prevent="submit_idea">
       <input
         v-model="add_idea_form"
         type="text"
@@ -11,15 +16,15 @@
         required
       />
       <label :for="props.headline + 'idea'">Add idea...</label>
-      <button class="add_idea" @click.prevent="submit_idea">✓</button>
+      <button class="add_idea" type="submit">✓</button>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import data from "~/assets/content.json";
-
+import { isInDestructureAssignment } from "@vue/compiler-core";
+import { Ref, ref, reactive } from "vue";
+// import data from "~/assets/content.json";
 // const { data } = await useAsyncData("body", async () => {
 //   return queryContent().where({ _file: "content.json" }).findOne();
 // });
@@ -27,30 +32,21 @@ import data from "~/assets/content.json";
 const props = defineProps<{
   headline: string;
   img_src: string;
-  ideas: Array<Array<string|Array<string>>>;
+  ideas: Array<Array<string | Array<string>>>;
 }>();
 
-interface Result {
-  success: boolean;
-}
+const emit = defineEmits<{
+  (e: "update:ideas", value: Array<Array<string | Array<string>>>): void;
+}>();
 
 const add_idea_form: Ref<string> = ref("");
 
 async function submit_idea() {
   if (add_idea_form.value.length > 0) {
-    await data.forEach((c) => {
-      if (c.Category == props.headline) {
-        c.ideas.push([add_idea_form.value, []]);
-      }
-    });
+    var ideas_new = props.ideas;
+    ideas_new.push([add_idea_form.value, []]);
+    emit("update:ideas", ideas_new);
     add_idea_form.value = "";
-    const r: Result = await $fetch("/api/content", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    if (r.success == true) {
-      console.log("success");
-    }
   }
 }
 </script>

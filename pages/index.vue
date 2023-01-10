@@ -2,10 +2,10 @@
   <div class="layout">
     <h1 id="main_headline">Scotland, we are coming</h1>
     <Category
-      v-if="data"
-      v-for="category in data"
+      v-if="content"
+      v-for="category in content"
       :headline="category.Category"
-      :ideas="category.ideas"
+      v-model:ideas="category.ideas"
       :img_src="category.img_src"
     />
     <form class="input_container">
@@ -41,8 +41,25 @@
 </template>
 
 <script setup lang="ts">
-import data from "~/assets/content.json";
 import { Ref, ref, watch } from "vue";
+
+interface Content {
+  Category: string,
+  img_src: string,
+  ideas: (string|string[])[][]
+}
+
+const content: Content[] = reactive([])
+
+
+useFetch("/api/content", {method: "GET"}).then(async(result)=>{
+  console.log(result.data.value)
+  content.splice(0, content.length, ...result.data.value)
+})
+
+// const content: Content[] = reactive((await useFetch('/api/content', {method:"GET"})).data)
+
+// const content = reactive(data)
 
 const add_category_input: Ref<string> = ref("");
 const file = ref();
@@ -52,25 +69,29 @@ async function handle_file() {
   file_count.value = file.value.files.length;
 }
 
-async function upload_image() {
-  console.log(file.value.files[0]);
-  const fd = new FormData();
-  fd.append("file", file.value.files[0]);
-  console.log(fd);
-  var ajaxRequest = new XMLHttpRequest();
-  ajaxRequest.open("POST", "/api/image");
-  ajaxRequest.send(fd);
-}
 
 async function submit_category() {
-  await upload_image();
-
-  data.push({
+  content.push({
     Category: add_category_input.value,
     img_src: file.value.files[0].name,
     ideas: [],
   });
 }
+
+interface Result {
+  success: boolean;
+}
+
+watch(content, async (n,o)=>{
+  const r: Result = await $fetch("/api/content", {
+      method: "POST",
+      body: JSON.stringify(content),
+    });
+    if (r.success == true) {
+      console.log("success");
+    }
+})
+
 </script>
 
 <style scoped>

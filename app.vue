@@ -95,7 +95,7 @@
   font-weight: bold;
   text-decoration: none;
   font-size: 1.2rem;
-  box-shadow: 0 0 10px var(--neon_green);
+  box-shadow: 0 0 15px var(--neon_green);
   border-radius: 5px;
   color: var(--ivory);
   background-color: var(--blue);

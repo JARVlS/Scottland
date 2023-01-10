@@ -1,18 +1,1 @@
-[
-  {
-    "Category": "Getting there",
-    "img_src": "/imgs/boat_norhter_lights.jpg",
-    "ideas": [
-      ["Ferry to England - Drive to Scotland", ["Bullet point one"]],
-      ["Ferry from France to Scotland", []]
-    ]
-  },
-  {
-    "Category": "Activities",
-    "img_src": "/imgs/under_the_stars.png",
-    "ideas": [
-      ["Climbin mountains", []],
-      ["Drinking fresh spring water", []]
-    ]
-  }
-]
+[{"Category":"Getting there","img_src":"/imgs/boat_norhter_lights.jpg","ideas":[["Ferry to England - Drive to Scotland",["Bullet point one"]],["Ferry from France to Scotland",[]]]},{"Category":"Activities","img_src":"/imgs/under_the_stars.png","ideas":[["Climbin mountains",[]],["Drinking fresh spring water",[]],["Play football with Shaun",[]]]}]
